@@ -17,9 +17,9 @@ function MyApp({Component, pageProps}: AppProps) {
         <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
         <nav className={styles.nav}>
           <Link href="/">Home</Link>
-          <a href="/you">You</a>
-          <a href="/company">Company</a>
-          <a href="/profile">Evil Corp</a>
+          <Link href="/you">You</Link>
+          <Link href="/company">Company</Link>
+          <Link href="/profile">Evil Corp</Link>
         </nav>
       </header>
       <main className={styles.main}>
