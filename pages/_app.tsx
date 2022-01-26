@@ -1,8 +1,32 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import '../styles/globals.css';
+import type {AppProps} from 'next/app';
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from '../styles/App.module.css';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+function MyApp({Component, pageProps}: AppProps) {
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Playing around</title>
+        <meta name="description" content="Playing around" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <header className={styles.header}>
+        <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+        <nav className={styles.nav}>
+          <Link href="/">Home</Link>
+          <a href="/you">You</a>
+          <a href="/company">Company</a>
+          <a href="/profile">Evil Corp</a>
+        </nav>
+      </header>
+      <main className={styles.main}>
+        <Component {...pageProps} />
+      </main>
+    </div>
+  );
 }
 
-export default MyApp
+export default MyApp;
