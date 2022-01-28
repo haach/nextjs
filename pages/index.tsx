@@ -6,7 +6,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import type {NextPage} from 'next';
 import {FC, InputHTMLAttributes, useState} from 'react';
 import {csx} from '../utils/csx';
-
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 interface TodoItem {
   id: string;
   label: string;
@@ -122,13 +122,61 @@ const RadixDialog = () => (
           <Dialog.Title>Schöner Titel</Dialog.Title>
           <Dialog.Description>Description Lirum larum Löffelstiel</Dialog.Description>
           <Dialog.Close>
-            {' '}
             <CheckIcon />
           </Dialog.Close>
         </Dialog.Content>
       </Dialog.Overlay>
     </Dialog.Portal>
   </Dialog.Root>
+);
+const DDMenu = () => (
+  <DropdownMenu.Root>
+    <DropdownMenu.Trigger>Click me for e drop down fun</DropdownMenu.Trigger>
+
+    <DropdownMenu.Content
+      css={css`
+        background-color: aliceblue;
+        padding: 20px 30px;
+      `}
+    >
+      <DropdownMenu.Label />
+      <DropdownMenu.Item />
+
+      <DropdownMenu.Group>
+        <DropdownMenu.Item>Item A</DropdownMenu.Item>
+        <DropdownMenu.Item>Item B</DropdownMenu.Item>
+        <DropdownMenu.Item>Item C</DropdownMenu.Item>
+        <DropdownMenu.Item>Item D</DropdownMenu.Item>
+      </DropdownMenu.Group>
+
+      <DropdownMenu.CheckboxItem>
+        <DropdownMenu.ItemIndicator />
+      </DropdownMenu.CheckboxItem>
+
+      <DropdownMenu.Root>
+        <DropdownMenu.TriggerItem>
+          <p>DROP DOWN INCEPTION</p>
+        </DropdownMenu.TriggerItem>
+        <DropdownMenu.Content
+          css={css`
+            background-color: salmon;
+            padding: 20px 30px;
+          `}
+        >
+          There is so much more I wanted to show you !
+          <DropdownMenu.Group>
+            <DropdownMenu.Item>Item A</DropdownMenu.Item>
+            <DropdownMenu.Item>Item B</DropdownMenu.Item>
+            <DropdownMenu.Item>Item C</DropdownMenu.Item>
+            <DropdownMenu.Item>Item D</DropdownMenu.Item>
+          </DropdownMenu.Group>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+
+      <DropdownMenu.Separator />
+      <DropdownMenu.Arrow />
+    </DropdownMenu.Content>
+  </DropdownMenu.Root>
 );
 
 const Home: NextPage = () => {
@@ -140,6 +188,7 @@ const Home: NextPage = () => {
       <TextInput name="text1" placeholder="type text here" />
       <NumberInput name="number" placeholder="type number here" />
       <RadixDialog />
+      <DDMenu />
     </>
   );
 };
