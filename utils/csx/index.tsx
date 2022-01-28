@@ -33,13 +33,13 @@ export const csx = <S extends string = '', T extends keyof React.ReactHTML = 'di
       React.PropsWithChildren<{
         css?: SerializedStyles;
       }>
-  >((props, ref) => {
+  >(function fowardCsxRef(props, ref) {
     const activeConditionals = keys(conditionalStylesMap)
       .filter((k) => !!props[k])
       .map((k) => conditionalStylesMap[k]);
     // remove conditional styles so they are not passed as html attr
     const nonStyleProps = keys(props)
-      .filter((k) => !(k in conditionalStylesMap))
+      .filter((k) => !((k as any) in conditionalStylesMap))
       .reduce((p, k) => ({...p, [k]: props[k]}), {});
     return jsx(elementType ?? 'div', {
       ...nonStyleProps,
