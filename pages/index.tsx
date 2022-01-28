@@ -85,15 +85,6 @@ const NumberInput: FC<InputProps> = (props) => {
   return <input type="number" {...props} />;
 };
 
-const RightSlot = csx([
-  css`
-    margin-left: auto;
-  `,
-]);
-const item = css`
-  display: flex;
-`;
-
 const RadixDialog = () => (
   <Dialog.Root>
     <Dialog.Trigger>Click me for a dialog!</Dialog.Trigger>
@@ -124,6 +115,7 @@ const RadixDialog = () => (
           <Dialog.Close>
             <CheckIcon />
           </Dialog.Close>
+          <DDMenu />
         </Dialog.Content>
       </Dialog.Overlay>
     </Dialog.Portal>
@@ -131,7 +123,7 @@ const RadixDialog = () => (
 );
 const DDMenu = () => (
   <DropdownMenu.Root>
-    <DropdownMenu.Trigger>Click me for e drop down fun</DropdownMenu.Trigger>
+    <DropdownMenu.Trigger>Click me for drop down fun</DropdownMenu.Trigger>
 
     <DropdownMenu.Content
       css={css`
