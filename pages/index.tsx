@@ -1,13 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import {FC, InputHTMLAttributes, useState} from 'react';
-
-import type {NextPage} from 'next';
-
 import {css} from '@emotion/react';
-
 import * as Checkbox from '@radix-ui/react-checkbox';
-import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
-import {DotFilledIcon, CheckIcon, ChevronRightIcon} from '@radix-ui/react-icons';
+import {CheckIcon} from '@radix-ui/react-icons';
+import * as Dialog from '@radix-ui/react-dialog';
+import type {NextPage} from 'next';
+import {FC, InputHTMLAttributes, useState} from 'react';
 import {csx} from '../utils/csx';
 
 interface TodoItem {
@@ -97,83 +94,42 @@ const item = css`
   display: flex;
 `;
 
-const ContextMenu: FC = () => {
-  const [bookmarksChecked, setBookmarksChecked] = useState(true);
-  const [urlsChecked, setUrlsChecked] = useState(false);
-  const [person, setPerson] = useState('pedro');
-  return (
-    <ContextMenuPrimitive.Root>
-      <ContextMenuPrimitive.Trigger>
-        <h3>Right click here.</h3>
-      </ContextMenuPrimitive.Trigger>
-
-      <ContextMenuPrimitive.Content
-        sideOffset={5}
+const RadixDialog = () => (
+  <Dialog.Root>
+    <Dialog.Trigger>Click me for a dialog!</Dialog.Trigger>
+    <Dialog.Portal>
+      <Dialog.Overlay
         css={css`
-          padding: 20px;
-          background-color: white;
-          box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.3);
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         `}
       >
-        <ContextMenuPrimitive.Item css={item}>
-          Back <RightSlot>⌘+[</RightSlot>
-        </ContextMenuPrimitive.Item>
-        <ContextMenuPrimitive.Item disabled css={item}>
-          Foward <RightSlot>⌘+]</RightSlot>
-        </ContextMenuPrimitive.Item>
-        <ContextMenuPrimitive.Item css={item}>
-          Reload <RightSlot>⌘+R</RightSlot>
-        </ContextMenuPrimitive.Item>
-        <ContextMenuPrimitive.Root>
-          <ContextMenuPrimitive.TriggerItem>
-            More Tools
-            <RightSlot>
-              <ChevronRightIcon />
-            </RightSlot>
-          </ContextMenuPrimitive.TriggerItem>
-          <ContextMenuPrimitive.Content sideOffset={2} alignOffset={-5}>
-            <ContextMenuPrimitive.Item>
-              Save Page As… <RightSlot>⌘+S</RightSlot>
-            </ContextMenuPrimitive.Item>
-            <ContextMenuPrimitive.Item>Create Shortcut…</ContextMenuPrimitive.Item>
-            <ContextMenuPrimitive.Item>Name Window…</ContextMenuPrimitive.Item>
-            <ContextMenuPrimitive.Separator />
-            <ContextMenuPrimitive.Item css={item}>Developer Tools</ContextMenuPrimitive.Item>
-          </ContextMenuPrimitive.Content>
-        </ContextMenuPrimitive.Root>
-        <ContextMenuPrimitive.Separator />
-        <ContextMenuPrimitive.CheckboxItem checked={bookmarksChecked} onCheckedChange={setBookmarksChecked}>
-          <ContextMenuPrimitive.ItemIndicator>
+        <Dialog.Content
+          css={css`
+            background-color: white;
+            padding: 20px 30px;
+          `}
+        >
+          <Dialog.Title>Schöner Titel</Dialog.Title>
+          <Dialog.Description>Description Lirum larum Löffelstiel</Dialog.Description>
+          <Dialog.Close>
+            {' '}
             <CheckIcon />
-          </ContextMenuPrimitive.ItemIndicator>
-          Show Bookmarks <RightSlot>⌘+B</RightSlot>
-        </ContextMenuPrimitive.CheckboxItem>
-        <ContextMenuPrimitive.CheckboxItem checked={urlsChecked} onCheckedChange={setUrlsChecked}>
-          <ContextMenuPrimitive.ItemIndicator>
-            <CheckIcon />
-          </ContextMenuPrimitive.ItemIndicator>
-          Show Full URLs
-        </ContextMenuPrimitive.CheckboxItem>
-        <ContextMenuPrimitive.Separator />
-        <ContextMenuPrimitive.Label>People</ContextMenuPrimitive.Label>
-        <ContextMenuPrimitive.RadioGroup value={person} onValueChange={setPerson}>
-          <ContextMenuPrimitive.RadioItem value="pedro">
-            <ContextMenuPrimitive.ItemIndicator>
-              <DotFilledIcon />
-            </ContextMenuPrimitive.ItemIndicator>
-            Pedro Duarte
-          </ContextMenuPrimitive.RadioItem>
-          <ContextMenuPrimitive.RadioItem value="colm">
-            <ContextMenuPrimitive.ItemIndicator>
-              <DotFilledIcon />
-            </ContextMenuPrimitive.ItemIndicator>
-            Colm Tuite
-          </ContextMenuPrimitive.RadioItem>
-        </ContextMenuPrimitive.RadioGroup>
-      </ContextMenuPrimitive.Content>
-    </ContextMenuPrimitive.Root>
-  );
-};
+          </Dialog.Close>
+        </Dialog.Content>
+      </Dialog.Overlay>
+    </Dialog.Portal>
+  </Dialog.Root>
+);
 
 const Home: NextPage = () => {
   return (
@@ -183,7 +139,7 @@ const Home: NextPage = () => {
       <Todo />
       <TextInput name="text1" placeholder="type text here" />
       <NumberInput name="number" placeholder="type number here" />
-      <ContextMenu />
+      <RadixDialog />
     </>
   );
 };
